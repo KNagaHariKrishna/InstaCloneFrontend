@@ -1,0 +1,30 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+hr{
+    height: 1px;
+    background-color: #006238;
+}
+.heading{
+    font-family: Palatino;
+    color: #006238;
+    font-size: 64px;
+    font-weight: normal;
+}
+.logo{
+    margin-bottom: 25px;
+}
+.cam{
+    margin-top: 15px;
+}
+.postform{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+.input-group{
+    width: 600px;
+}
