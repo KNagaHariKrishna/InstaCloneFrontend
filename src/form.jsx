@@ -1,80 +1,50 @@
-import React from "react";
+import { useState } from "react"
+import { Link, Outlet } from "react-router-dom";
 import Header from "./header";
-import {useState} from "react" 
-export default function Form() {
-  const [name, setName] = useState('')
-  const [location , setLocation] = useState('')
-  const [PostImage, setPostImage] = useState('') ;
-  const [description, setDescritpion] = useState(""); 
+// import "./postForm.css"
+const PostForm = ()=>{
+    const [username, setUsername] = useState('')
+    const [address , setAddress] = useState('')
+    const [imageFile, setImageFile] = useState('') ;
+    const [discription, setDiscription] = useState(""); 
 
-  const uploadPost = () => {
-    const formData = new FormData();
-    // Map => takes the data in the key value format 
-    formData.append("name", name)
-    formData.append("location", location)
-    formData.append("description", description)
-    formData.append("PostImage", PostImage)
+    const uploadPost = ()=>{
+        const formData = new FormData()
+        formData.append("username",username)
+        formData.append("address",address)
+        formData.append("discription",discription)
+        formData.append("image_file", imageFile)
 
-    fetch("http://localhost:3004/api", {
-        method: 'POST',
-        body: formData
-    })
+        fetch("http://localhost:8080/addpost", {
+            method: 'POST',
+            body: formData
+        })
+    }
+    return(
+
+        <>
+        <Header/>
+        <hr/>
+               <div className="container">
+        
+        <input type="file" onChange={(e) => {
+           setImageFile(e.target.files[0]) ;
+       }} />
+       <input placeholder="UserName" value={username}  onChange={(e) => setUsername(e.target.value)}/>
+       <input placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)}/>
+       <textarea placeholder="discription" onChange={(e) => setDiscription(e.target.value)}></textarea>
+       <Link to={"/Postview"}>
+       <button onClick={uploadPost} className="post">
+           Post
+       </button>
+       </Link>
+       <Outlet/>
+       
+  
+  </div>   
+        </>
+   
+    )
 }
-  return (
-    <>
-      <Header />
-      <hr />
-      <div className="postform">
-        <div className="input-group mb-3">
-          <div className="custom-file">
-            <input
-              type="file"
-              className="custom-file-input"
-              id="inputGroupFile02"
-              onChange={(e) => {
-                setPostImage(e.target.files[0]) ;
-            }}
 
-            />
-            <label className="custom-file-label" htmlFor="inputGroupFile02">
-              Choose file
-            </label>
-          </div>
-        </div>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Author"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-            value={name}
-            onChange={(e)=>{setName(e.target.value)}}
-          />
-          <input
-            type="text"
-            className="form-control"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-            style={{ marginLeft: "25px" }}
-            placeholder="Location"
-            value={location}
-            onChange={(e)=>{setLocation(e.target.value)}}
-          />
-        </div>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-            placeholder="Description"
-            value={description}
-            onChange={(e)=>{setDescritpion(e.target.value)}}
-          />
-        </div>
-        <button onClick={uploadPost}>Post</button>
-      </div>
-    </>
-  );
-}
+export default PostForm

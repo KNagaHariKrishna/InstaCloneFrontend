@@ -6,7 +6,7 @@ import Header from './header';
 export default function Postview() {
   const [posts,setPosts]=useState([])
   useEffect(()=>{
-  fetch("http://localhost:3004").then((res)=>res.json()
+  fetch("http://localhost:8080/getpost").then((res)=>res.json()
   ).then((data)=>{setPosts(data)
     console.log(data)
   },
@@ -14,8 +14,8 @@ export default function Postview() {
   ).catch((err)=>{if(err){
     console.log(err)
   }})
-  },[])
-  let data=posts.map((post,index)=>{
+  },[posts])
+  let data=posts.reverse().map((post,index)=>{
     return(
       <Card post={post} key={index}/>
     )

@@ -7,25 +7,28 @@ function Card({post}) {
         <section className='card-header'>
             <div>
                 <div className='name'>{post.name}</div>
-                <div className=''>{post.location}</div>
+                <div className='location'>{post.location}</div>
             </div>
             <span>
-            <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
+              <img src={require("./Images/more_icon@2x.jpg")} className="moreopt"/>
+            {/* <i className="fa fa-ellipsis-h" aria-hidden="true"></i> */}
             </span>
         </section>
         <section className='card-img'>
             {/* <img src={require(""+post.PostImage)} alt="place"/> */}
-            <img width={100} height={100} style={{border: '2px solid red'}} src={`http://localhost:3004/images/${post.PostImage}`}/>
+            <img src={`http://localhost:8080/images/${post.image}`} className="Cardimg"/>
         </section>
+        <div className='footer'>
         <section className='likes'>
         <span>
-        <i class="fa-regular fa-heart"></i><i class="fa-regular fa-paper-plane"></i>
+          <img src={require("./Images/heart.jpg")} alt="heartimg"/><img src={require("./Images/share.jpg")} alt="shareimg" className='share'/>
         </span>
-        <span className='date'>{post.date}</span>
+        <span className='date'>{post.date.toString().split("T")[0]}</span>
         </section>
         
         <span className='numlike'>{post.likes} likes</span>
-        <section className='description'>{post.description}</section>
+        <section className='description'>{post.discription}</section>
+        </div>
     </section>
     </center>
   )

@@ -10,8 +10,9 @@ export default function Landing_page() {
       </section>
       <section className='Text'>
       <h1 className='team'>10x Team 04</h1>
+      <h4>Design by K.NAGA HARI KRISHNA</h4>
         <Link to="/Postview">
-        <button>Enter</button>
+        <button className='landbtn'>Enter</button>
         </Link>
       </section>
       <Outlet/>
